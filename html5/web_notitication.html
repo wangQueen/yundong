@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="button">有人想加你为好友</button>
+	<p id="text"></p>
+</body>
+<script>
+	// Notification.requestPermission(callback);
+	// Notification.requestPermission().then(function(result) {
+	//   // result可能是是granted, denied, 或default.
+	// });
+if (window.Notification) {
+    var button = document.getElementById('button'), text = document.getElementById('text');
+   
+    var popNotice = function() {
+        if (Notification.permission == "granted") {
+            var notification = new Notification("Hi，帅哥：", {
+                body: '可以加你为好友吗？',
+                icon: 'http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg'
+            });
+            
+            notification.onclick = function() {
+                text.innerHTML = '张小姐已于' + new Date().toTimeString().split(' ')[0] + '加你为好友！';
+                notification.close();    
+            };
+        }    
+    };
+    
+    button.onclick = function() {
+        if (Notification.permission == "granted") {
+            popNotice();
+         
+        } else if (Notification.permission != "denied") {
+            Notification.requestPermission(function (permission) {
+              popNotice();
+            });
+        }
+    };
+} else {
+    alert('浏览器不支持Notification');    
+}
+</script>
+</html>
