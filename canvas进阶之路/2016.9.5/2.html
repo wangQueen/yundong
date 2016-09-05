@@ -1,0 +1,59 @@
+<!-- 
+  arc(x, y, radius, startAngle, endAngle, anticlockwise)
+  方法接受五个参数：x，y是圆心坐标radius是半径，startAngle和endAngle分别是起末弧度（以x轴为基准），anticlockwise为true表示逆时针，反之顺时针。 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>Canvas tutorial</title>
+    <script type="text/javascript">
+      window.onload=function(){
+   
+          	 // get the canvas element using the DOM
+          var canvas = document.getElementById('tutorial');
+         
+          // Make sure we don't execute when canvas isn't supported
+          if (canvas.getContext){
+         
+            // use getContext to use the canvas for drawing
+            var ctx = canvas.getContext('2d');
+            
+            // Draw shapes
+            ctx.beginPath();
+            ctx.arc(75,75,50,0,Math.PI*2,true); // Outer circle
+            ctx.moveTo(110,75);
+            ctx.arc(75,75,35,0,Math.PI,false);   // Mouth
+            ctx.moveTo(65,65);
+            ctx.arc(60,65,5,0,Math.PI*2,true);  // Left eye
+            ctx.moveTo(95,65);
+            ctx.arc(90,65,5,0,Math.PI*2,true);  // Right eye
+            ctx.stroke();
+            // 填充三角形
+            ctx.beginPath();
+            ctx.moveTo(25,25);
+            ctx.lineTo(105,25);
+            ctx.lineTo(25,105);
+            ctx.fill();
+            // 勾边三角形
+            ctx.beginPath();
+            ctx.moveTo(125,125);
+            ctx.lineTo(125,45);
+            ctx.lineTo(45,125);
+            ctx.closePath();
+            ctx.stroke();
+         
+          } else {
+            alert('You need Safari or Firefox 1.5+ to see this demo.');
+          }
+        }
+      
+    </script>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+  </head>
+  <body onload="draw();">
+    <canvas id="tutorial" width="150" height="150"></canvas>
+  </body>
+</html>
